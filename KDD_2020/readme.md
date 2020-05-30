@@ -1,4 +1,4 @@
-Building Recommender Systems with PyTorch - Tutorial at KDD 2020
+Building Recommender Systems with PyTorch - KDD 2020 Tutorial
 ========================================================================
 *Dheevatsa Mudigere, Maxim Naumov, Geeta Chauhan, Joe Spisak*
 
