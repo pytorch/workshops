@@ -1,4 +1,4 @@
-# CS7643 Deep Learing | Fall 2020 at Georgia Tech (Profesor Zsolt Kira)
+# CS7643 Deep Learing | Fall 2020 at Georgia Tech (Prof. Zsolt Kira)
 
 This repo contains materials for students to learn PyTorch and help them through the various course modules for the Fall 2020 CS7643 deep learning course at Georgia Tech.
 
