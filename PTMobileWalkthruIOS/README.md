@@ -12,6 +12,19 @@ To set this project up and run it in Xcode:
 4. Open `PTMobileDemo.xcworkspace` in Xcode.
 5. Build and run the example in Xcode.
 
+## Model Preparation
+
+The video describes a general process for getting your model into your project. If you'd like to try the pre-trained MobileNetV2 model used in the video, follow these steps in a Python environment with PyTorch 1.5 or higher and TorchVision 0.6 or higher installed:
+
+1. `python` - open a Python REPL; the rest of the steps will be completed there
+2. `import torch` and `import torchvision`
+3. `model = torchvision.models.mobilenet_v2(pretrained=True)` will give you an instance of the model
+4. **Optional:** Follow the model optimization procedure shown in the video
+5. **Required:** `scripted_model = torch.jit.script(model)` will export your model to TorchScript
+6. `torch.jit.save(scripted_model, 'model.pt')` saves your model to a file
+
+You should now have a file called `model.pt` that you can use in your mobile project.
+
 ## Project Notes
 
 * This project is intended to be used with PyTorch 1.5 or higher, and Xcode 11.4 or higher.

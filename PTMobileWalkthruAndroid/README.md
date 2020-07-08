@@ -6,6 +6,17 @@ This project was made for the PyTorch Hackathon 2020, as a companion to a brief 
 
 To set this project up and run it in Android Studio, clone this git repository, and open the `PTMobileWalkthruAndroid` folder as a project. With the project open you should be able to build and run the project.
 
+## Model Preparation
+
+The video describes a general process for getting your model into your project. If you'd like to try the pre-trained MobileNetV2 model used in the video, follow these steps in a Python environment with PyTorch 1.5 or higher and TorchVision 0.6 or higher installed:
+
+1. `python` - open a Python REPL; the rest of the steps will be completed there
+2. `import torch` and `import torchvision`
+3. `model = torchvision.models.mobilenet_v2(pretrained=True)` will give you an instance of the model
+4. **Optional:** Follow the model optimization procedure shown in the video
+5. **Required:** `scripted_model = torch.jit.script(model)` will export your model to TorchScript
+6. `torch.jit.save(scripted_model, 'model.pt')` saves your model to a file
+
 ## Project Notes
 
 * This project is intended to be used with PyTorch 1.5 or higher, and Android Studio 3.5 or higher.
