@@ -18,4 +18,4 @@ To set this project up and run it in Xcode:
 * If you want to upgrade the version of the PyTorch mobile runtime you're using, you can use the `pod update` command.
 * The first time you run the app and press the "Infer" button, it may take a while to load the model and run the inference. Subsequent inferences will be quicker.
 
-**For more information on PyTorch Mobile for iOS, visit the [PyTorch Mobile homepage](https://pytorch.org/mobile/home/).
+**For more information on PyTorch Mobile for iOS, visit the [PyTorch Mobile homepage](https://pytorch.org/mobile/home/).**
