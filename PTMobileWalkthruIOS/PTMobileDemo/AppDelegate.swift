@@ -1,10 +1,10 @@
+// Copyright (c) 2020 Facebook, Inc. and its affiliates.
+// All rights reserved.
 //
-//  AppDelegate.swift
-//  PTMobileDemo
-//
-//  Created by Brad Heintz on 6/23/20.
-//  Copyright © 2020 Brad Heintz. All rights reserved.
-//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree.
+
+
 
 import UIKit
 
