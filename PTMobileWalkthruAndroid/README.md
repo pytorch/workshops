@@ -12,4 +12,4 @@ To set this project up and run it in Android Studio, clone this git repository, 
 * If you want to upgrade the version of the PyTorch mobile runtime you're using, you can edit the `build.gradle` file for your app (not the file for the project).
 * The first time you run the app and press the "Infer" button, it may take a while to load the model and run the inference. Subsequent inferences will be quicker.
 
-**For more information on PyTorch Mobile for iOS, visit the [PyTorch Mobile homepage](https://pytorch.org/mobile/home/).**
+**For more information on PyTorch Mobile for Android, visit the [PyTorch Mobile homepage](https://pytorch.org/mobile/home/).**
