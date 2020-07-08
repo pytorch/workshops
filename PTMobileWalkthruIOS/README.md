@@ -12,8 +12,6 @@ To set this project up and run it in Xcode:
 4. Open `PTMobileDemo.xcworkspace` in Xcode.
 5. Build and run the example in Xcode.
 
-To get your own copy of the model:
-
 ## Project Notes
 
 * This project is intended to be used with PyTorch 1.5 or higher, and Xcode 11.4 or higher.
