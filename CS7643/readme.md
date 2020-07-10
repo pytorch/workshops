@@ -8,10 +8,12 @@ This repo contains materials for students to learn PyTorch and help them through
 
 
 ## Usage Instructions 
-1. Open Colab at 
-
-
-
+1. Open [Colab](https://colab.research.google.com/)
+2. Select 'GitHub' in the top selector
+3. Type in 'pytorch' into the search
+4. Select 'pytorch/workshops' in the repository field (branch should be master)
+5. A number of notebooks should autopopulate, double click on a notebook to start a Colab session with that notebook
+6. Once the notebook is open, you can go to menu and select 'Runtime'->'Change runtime type' and pick GPU. This is the prefered compute backend for PyTorch.
 
 ## Module 1: Introduction to Neural Networks
 
