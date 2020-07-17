@@ -17,6 +17,10 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ## Module 1: Introduction to Neural Networks
 
+TODO: Add summary of course objectives
+
+TODO: Links to materials
+
 1. [PyTorch Cheat Sheet](https://pytorch.org/tutorials/beginner/ptcheat.html#pytorch-cheat-sheet) - A handy reference for many of the commonly used PyTorch APIs
 2. 
 
@@ -24,9 +28,19 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ## Module 2: Convolutional Neural Networks
 
+TODO: Add summary of course objectives
 
-## Module 3: Recurrent Neural Networks
+TODO: Links to materials
 
+## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
+
+TODO: Add summary of course objectives
+
+TODO: Links to materials
 
 ## Module 4: Advanced Topics
+
+TODO: Add summary of course objectives
+
+TODO: Links to materials
 
