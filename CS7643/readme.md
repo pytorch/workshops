@@ -36,9 +36,13 @@ This repo contains materials for students to learn PyTorch and help them through
 ### Links to materials
 
 1. [PyTorch Cheat Sheet](https://pytorch.org/tutorials/beginner/ptcheat.html#pytorch-cheat-sheet) - A handy reference for many of the commonly used PyTorch APIs
-2. 
-
-
+2. [What is PyTorch Tutorial](https://pytorch.org/tutorials/beginner/blitz/tensor_tutorial.html#sphx-glr-beginner-blitz-tensor-tutorial-py) - a short tutorial that walks through tensor manipulation, numpy and using cuda tensors.
+3. [Visualizing with Tensorboard](https://pytorch.org/tutorials/intermediate/tensorboard_tutorial.html) - TensorBoard is a popular tool for visualizing embedding, loss curves, data and much more. 
+4. [torch.nn tutorial showing NNs from scratch (by Jeremy Howard)](https://pytorch.org/tutorials/beginner/nn_tutorial.html) - walks through the various levels of abstraction for creating neural networks.
+5. [Autograd: Automatic Differentiation walkthrough](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html#sphx-glr-beginner-blitz-autograd-tutorial-py) - a short primer on backpropogation and the power of autograd
+6. [Neural Networks Intro](https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py) - an intro tutorial on how to build a neural network program and the various components
+7. [torch.optim API documentation](https://pytorch.org/docs/stable/optim.html) - How to use optimizers in PyTorch
+8. [torch.nn.init walkthrough](https://pytorch.org/docs/stable/nn.init.html) - How to initialize neural networks in PyTorch
 
 ## Module 2: Convolutional Neural Networks
 
