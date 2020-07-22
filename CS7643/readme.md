@@ -62,7 +62,7 @@ This repo contains materials for students to learn PyTorch and help them through
 1. [torch.nn.conv](https://pytorch.org/docs/stable/nn.html#convolution-layers) - API docs for conv layers
 2. [torch.nn.pooling](https://pytorch.org/docs/stable/nn.html#pooling-layers) - API docs for pooling layers
 3. [Training a Classifier Tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-beginner-blitz-cifar10-tutorial-py) - Short tutorial on defining and training an image classifier. 
-4. [Getting started with distributed data parallel training](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) - A walkthrough of how to use distributed training on PyTorch
+4. [Getting started with distributed data parallel (DDP) training](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) - A walkthrough of how to use distributed training on PyTorch
 
 ## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
 
@@ -98,6 +98,8 @@ This repo contains materials for students to learn PyTorch and help them through
 3. Understand basics of reinforcement learning
 
 ### Links to materials
+1. [Weakly supervision and computer vision example](https://pytorch.org/hub/facebookresearch_WSL-Images_resnext/) - Interactive PyTorch Hub example
 1. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
-2. 
+2. (Optional)[Just in time compilation & TorchScript]()
+3. (Optional)[Remote procedural call-RPC](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - ..
 
