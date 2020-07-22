@@ -62,6 +62,7 @@ This repo contains materials for students to learn PyTorch and help them through
 1. [torch.nn.conv](https://pytorch.org/docs/stable/nn.html#convolution-layers) - API docs for conv layers
 2. [torch.nn.pooling](https://pytorch.org/docs/stable/nn.html#pooling-layers) - API docs for pooling layers
 3. [Training a Classifier Tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-beginner-blitz-cifar10-tutorial-py) - Short tutorial on defining and training an image classifier. 
+4. [Getting started with distributed data parallel training](https://pytorch.org/tutorials/intermediate/ddp_tutorial.html) - A walkthrough of how to use distributed training on PyTorch
 
 ## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
 
