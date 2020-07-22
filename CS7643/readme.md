@@ -17,7 +17,7 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ## Module 1: Introduction to Neural Networks
 
-### The lessons covered in this module include:
+### Lessons covered:
 - Lesson 1: Linear Classifiers and Gradient Descent
 - Lesson 2: Matrix and Vector Calculus, Vectorization
 - Lesson 3: Neural Networks
@@ -42,19 +42,41 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ## Module 2: Convolutional Neural Networks
 
-TODO: Add summary of course objectives
+### Lessons covered:
+- Lesson 6: Convolution and Pooling Layers
+- Lesson 7: CNN Architectures
+- Lesson 8: PyTorch and Scalable Training
+- Lesson 9: Advanced Computer Vision Architectures
 
-TODO: Links to materials
+### Learning objectives:
+1. Understand convolution and pooling layers
+2. Understand current state of art CNN architectures
+3. Understand PyTorch framework layout, usage, and tips/tricks
+4. Understand PyTorch framework layout, usage, and tips/tricks
+
+### Links to materials
+1. 
+
 
 ## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
 
-TODO: Add summary of course objectives
+### Lessons covered:
+- 
 
-TODO: Links to materials
+### Learning objectives:
+1. 
+
+### Links to materials
+1. 
 
 ## Module 4: Advanced Topics
 
-TODO: Add summary of course objectives
+### Lessons covered:
+- 
 
-TODO: Links to materials
+### Learning objectives:
+1. 
+
+### Links to materials
+1. 
 
