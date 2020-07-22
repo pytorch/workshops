@@ -7,7 +7,7 @@ This repo contains materials for students to learn PyTorch and help them through
 - [Discussion forums](https://discuss.pytorch.org/) - A community of over 31 thousand users and experts helping eachother use PyTorch.
 
 
-## Usage Instructions 
+## Usage Instructions (to be updated)
 1. Open [Colab](https://colab.research.google.com/)
 2. Select 'GitHub' in the top selector
 3. Type in 'pytorch' into the search
