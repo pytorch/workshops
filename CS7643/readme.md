@@ -61,10 +61,14 @@ This repo contains materials for students to learn PyTorch and help them through
 ## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
 
 ### Lessons covered:
-- 
+- Lesson 10: Recurrent Neural Network Fundamentals
+- Lesson 11: Long-Short Term Memory (LSTMs)
+- Lesson 12: Natural Language Processing (NLP)
 
 ### Learning objectives:
-1. 
+1. Understand fundamentals of sequence-based problems and recurrent neural networks
+2. Understand LSTMs
+3. Understand attention mechanisms, the transformer architecture, and NLP applications
 
 ### Links to materials
 1. 
@@ -72,10 +76,14 @@ This repo contains materials for students to learn PyTorch and help them through
 ## Module 4: Advanced Topics
 
 ### Lessons covered:
-- 
+- Lesson 13: Unsupervised and Semi-Supervised Learning
+- Lesson 14: Generative Models
+- Lesson 15: Deep Reinforcement Learning (DRL)
 
 ### Learning objectives:
-1. 
+1. Understand unsupervised learning fundamentals and key methods used
+2. Understand generative models
+3. Understand basics of reinforcement learning
 
 ### Links to materials
 1. 
