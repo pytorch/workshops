@@ -80,7 +80,10 @@ This repo contains materials for students to learn PyTorch and help them through
 1. [torch.nn recurrent layers](https://pytorch.org/docs/stable/nn.html#recurrent-layers) - APIs docs for recurrent layers
 2. [torch.nn.transformer layers](https://pytorch.org/docs/stable/nn.html#transformer-layers) - API docs for transformer layers
 3. [torch.nn.MultiheadAttention](https://pytorch.org/docs/stable/nn.html?highlight=attention#torch.nn.MultiheadAttention) - API docs for Multihead Attention
-4. [Sequence to sequence tutorial using torch.nn.transformer and multihead attention](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
+4. [Example to use RNN-based models for word language modeling](https://github.com/pytorch/examples/tree/master/word_language_model)
+5. [Example to use RNN-based models for machine translation](https://github.com/pytorch/text/pull/864)
+6. [Sequence to sequence tutorial using torch.nn.transformer and multihead attention](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
+7. [Train a BERT model and fine-tune for question-answer task](https://github.com/pytorch/text/tree/master/examples/BERT)
 
 ## Module 4: Advanced Topics
 
