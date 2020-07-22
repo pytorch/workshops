@@ -26,7 +26,7 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ### Learning objectives:
 1. Understand machine learning components (data, features, loss functions, and regularization), and optimization (gradient descent)
-2. Understand how deep learning differs from existing ML methods"
+2. Understand how deep learning differs from existing ML methods
 3. Have the ability to vectorize underlying machine learning computations
 4. Understand and implement simple multi-layered classifiers
 5. Understand backpropagation, explain its underlying concepts, and implement it
