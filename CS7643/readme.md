@@ -59,8 +59,9 @@ This repo contains materials for students to learn PyTorch and help them through
 4. Understand PyTorch framework layout, usage, and tips/tricks
 
 ### Links to materials
-1. 
-
+1. [torch.nn.conv](https://pytorch.org/docs/stable/nn.html#convolution-layers) - API docs for conv layers
+2. [torch.nn.pooling](https://pytorch.org/docs/stable/nn.html#pooling-layers) - API docs for pooling layers
+3. [Training a Classifier Tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-beginner-blitz-cifar10-tutorial-py) - Short tutorial on defining and training an image classifier. 
 
 ## Module 3: Recurrent Neural Networks & Sequence to Sequence Models
 
