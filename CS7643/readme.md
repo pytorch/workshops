@@ -99,7 +99,8 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ### Links to materials
 1. [Weakly supervision and computer vision example](https://pytorch.org/hub/facebookresearch_WSL-Images_resnext/) - Interactive PyTorch Hub example
-1. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
-2. (Optional)[Just in time compilation & TorchScript]()
-3. (Optional)[Remote procedural call-RPC](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - ..
+2. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
+3. [DeepRl Educational resources w/OpenAI](https://spinningup.openai.com/en/latest/)
+4. (Optional)[Just in time compilation & TorchScript]()
+5. (Optional)[Remote procedural call-RPC](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - ..
 
