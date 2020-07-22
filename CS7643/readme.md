@@ -17,9 +17,23 @@ This repo contains materials for students to learn PyTorch and help them through
 
 ## Module 1: Introduction to Neural Networks
 
-TODO: Add summary of course objectives
+### The lessons covered in this module include:
+- Lesson 1: Linear Classifiers and Gradient Descent
+- Lesson 2: Matrix and Vector Calculus, Vectorization
+- Lesson 3: Neural Networks
+- Lesson 4: Backpropagation
+- Lesson 5: Optimization Deep Neural Networks
 
-TODO: Links to materials
+### Learning objectives:
+1. Understand machine learning components (data, features, loss functions, and regularization), and optimization (gradient descent)
+2. Understand how deep learning differs from existing ML methods"
+3. Have the ability to vectorize underlying machine learning computations
+4. Understand and implement simple multi-layered classifiers
+5. Understand backpropagation, explain its underlying concepts, and implement it
+6. Understand PyTorch
+7. Understand various elements of optimizing neural networks (initialization, normalization, regularization, etc.)
+
+### Links to materials
 
 1. [PyTorch Cheat Sheet](https://pytorch.org/tutorials/beginner/ptcheat.html#pytorch-cheat-sheet) - A handy reference for many of the commonly used PyTorch APIs
 2. 
