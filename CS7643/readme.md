@@ -95,5 +95,6 @@ This repo contains materials for students to learn PyTorch and help them through
 3. Understand basics of reinforcement learning
 
 ### Links to materials
-1. 
+1. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
+2. 
 
