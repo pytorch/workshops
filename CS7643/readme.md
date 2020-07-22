@@ -103,4 +103,5 @@ This repo contains materials for students to learn PyTorch and help them through
 3. [DeepRl Educational resources w/OpenAI](https://spinningup.openai.com/en/latest/)
 4. (Optional)[Just in time compilation & TorchScript]()
 5. (Optional)[Remote procedural call-RPC](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - ..
-
+6. (Optional)[Quantizing models](tbd)
+7. (Optional)[Pruning models]()
