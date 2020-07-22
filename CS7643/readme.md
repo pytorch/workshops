@@ -76,7 +76,9 @@ This repo contains materials for students to learn PyTorch and help them through
 3. Understand attention mechanisms, the transformer architecture, and NLP applications
 
 ### Links to materials
-1. 
+1. [torch.nn recurrent layers](https://pytorch.org/docs/stable/nn.html#recurrent-layers) - APIs docs for recurrent layers
+2. [torch.nn.transformer layers](https://pytorch.org/docs/stable/nn.html#transformer-layers) - API docs for transformer layers
+3. [Sequence to sequence tutorial using torch.nn.transformer and multihead attention](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
 
 ## Module 4: Advanced Topics
 
