@@ -111,3 +111,4 @@ The top of tutorials on pytorch.org contain links directly to Colab notebooks th
 5. (Optional) [DDP + RPC (Remote procedural call) Usage](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst)
 6. (Optional) [Dynamic Quantization for BERT models](https://pytorch.org/tutorials/intermediate/dynamic_quantization_bert_tutorial.html)
 7. (Optional) [Pruning models to reduce unneeded parameters](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html)
+8. (Optional) [A PyTorch implementation for exploring deep and shallow knowledge distillation (KD) experiments with flexibility](https://github.com/peterliht/knowledge-distillation-pytorch)
