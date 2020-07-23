@@ -98,10 +98,10 @@ This repo contains materials for students to learn PyTorch and help them through
 3. Understand basics of reinforcement learning
 
 ### Links to materials
-1. [Weakly supervision and computer vision example](https://pytorch.org/hub/facebookresearch_WSL-Images_resnext/) - Interactive PyTorch Hub example
+1. [Weakly supervision and computer vision example](https://pytorch.org/hub/facebookresearch_WSL-Images_resnext/) - Interactive PyTorch Hub example of using weak supervision via hashtags for sota computer vision
 2. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
 3. [DeepRl Educational resources w/OpenAI](https://spinningup.openai.com/en/latest/)
-4. (Optional)[Just in time compilation & TorchScript]()
-5. (Optional)[Remote procedural call-RPC](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - ..
-6. (Optional)[Quantizing models](tbd)
-7. (Optional)[Pruning models]()
+4. (Optional)[Just in time compilation & TorchScript](https://pytorch.org/docs/stable/jit.html) - Guide and docs on how to jit models and ship models into non-python production
+5. (Optional)[DDP + RPC (Remote procedural call) Usage](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - Using RPC for 
+6. (Optional)[Dynamic Quantization for BERT models](https://pytorch.org/tutorials/intermediate/dynamic_quantization_bert_tutorial.html)
+7. (Optional)[Pruning models to reduce unneeded parameters](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html)
