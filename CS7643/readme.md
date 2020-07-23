@@ -107,6 +107,6 @@ The top of tutorials on pytorch.org contain links directly to Colab notebooks th
 2. [Deep Convolutional Generative Adversarial Networks](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html) - A full end to end tutorial on how to implement the popular DCGAN algorithm.
 3. [DeepRL Educational resources w/OpenAI](https://spinningup.openai.com/en/latest/)
 4. (Optional) [Just in time compilation & TorchScript](https://pytorch.org/docs/stable/jit.html) - Guide and docs on how to jit models and ship models into non-python production
-5. (Optional) [DDP + RPC (Remote procedural call) Usage](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst) - Using RPC for 
+5. (Optional) [DDP + RPC (Remote procedural call) Usage](https://github.com/pytorch/tutorials/blob/release/1.6/advanced_source/rpc_ddp_tutorial.rst)
 6. (Optional) [Dynamic Quantization for BERT models](https://pytorch.org/tutorials/intermediate/dynamic_quantization_bert_tutorial.html)
 7. (Optional) [Pruning models to reduce unneeded parameters](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html)
