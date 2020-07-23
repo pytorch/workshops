@@ -89,6 +89,7 @@ The top of tutorials on pytorch.org contain links directly to Colab notebooks th
 5. [Example to use RNN-based models for machine translation](https://github.com/pytorch/text/pull/864)
 6. [Sequence to sequence tutorial using torch.nn.transformer and multihead attention](https://pytorch.org/tutorials/beginner/transformer_tutorial.html)
 7. [Train a BERT model and fine-tune for question-answer task](https://github.com/pytorch/text/tree/master/examples/BERT)
+8. [Hugging Face pretrained transformer models](https://huggingface.co/transformers/quickstart.html)
 
 ## Module 4: Advanced Topics
 
