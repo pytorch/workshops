@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PTMobileWalkthru</string>
+    <string name="an_image">an image</string>
+    <string name="image_view">Image View</string>
+    <string name="infer">Infer</string>
+    <string name="your_inference_here">Your Inference Here</string>
+</resources>

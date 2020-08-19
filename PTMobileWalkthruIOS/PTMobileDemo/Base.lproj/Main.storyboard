@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PTMobileDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitten.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dEj-Gg-OK4">
+                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dEj-Gg-OK4" secondAttribute="height" multiplier="1:1" id="EM5-vx-48C"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byw-RJ-94g">
+                                <rect key="frame" x="177" y="474" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Rfa-rw-WnQ"/>
+                                </constraints>
+                                <state key="normal" title="Infer"/>
+                                <connections>
+                                    <action selector="doInference:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BRJ-1r-guL"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your inference here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hBM-wv-Hhx">
+                                <rect key="frame" x="16" y="520" width="382" height="326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dEj-Gg-OK4" secondAttribute="trailing" id="60s-fJ-Qa1"/>
+                            <constraint firstItem="dEj-Gg-OK4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8kk-j0-ro7"/>
+                            <constraint firstItem="hBM-wv-Hhx" firstAttribute="top" secondItem="byw-RJ-94g" secondAttribute="bottom" constant="16" id="IaI-By-lpg"/>
+                            <constraint firstItem="hBM-wv-Hhx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Uv4-80-VXF"/>
+                            <constraint firstItem="byw-RJ-94g" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WYG-HU-OcE"/>
+                            <constraint firstItem="dEj-Gg-OK4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jfM-XO-8z6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hBM-wv-Hhx" secondAttribute="bottom" constant="16" id="qOd-V1-V9h"/>
+                            <constraint firstItem="byw-RJ-94g" firstAttribute="top" secondItem="dEj-Gg-OK4" secondAttribute="bottom" constant="16" id="vYf-NM-mYZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hBM-wv-Hhx" secondAttribute="trailing" constant="16" id="zV3-Ch-q4B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="dEj-Gg-OK4" id="er0-Qh-rtz"/>
+                        <outlet property="textView" destination="hBM-wv-Hhx" id="O6E-Pl-7F7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="kitten.jpg" width="375" height="375"/>
+    </resources>
+</document>
