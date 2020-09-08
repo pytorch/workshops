@@ -8,16 +8,12 @@ This repo contains materials for students to learn PyTorch and help them through
 - [Papers with code](https://paperswithcode.com/sota) - A free resource that provides nearly 3000 leaderboards and 26k papers with code
 
 
-## Usage Instructions for notebooks in the pytorch/CS7643/moduleX folders
-1. Open [Colab](https://colab.research.google.com/)
-2. Select 'GitHub' in the top selector
-3. Type in 'pytorch' into the search
-4. Select 'pytorch/workshops' in the repository field (branch should be master)
-5. A number of notebooks should autopopulate, double click on a notebook to start a Colab session with that notebook
-6. Once the notebook is open, you can go to menu and select 'Runtime'->'Change runtime type' and pick GPU. This is the prefered compute backend for PyTorch.
+### Using tutorial notebooks with Colab
+The top of tutorials on pytorch.org contain link directly to Colab notebooks that are preconfigured and ready to use. Simply click through to get started. 
 
-### Else
-The top of tutorials on pytorch.org contain links directly to Colab notebooks that are preconfigured. Simply click through to get started. 
+E.g. https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html
+
+See the button at the top of the tutorial marked "Run in Google Colab".
 
 
 ## Module 1: Introduction to Neural Networks
