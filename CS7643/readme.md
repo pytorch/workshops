@@ -2,7 +2,7 @@
 
 This repo contains materials for students to learn PyTorch and help them through the various course modules for the Fall 2020 CS7643 deep learning course at Georgia Tech. Each of the modules below provides some selected content and notebooks that align with the analogous course module. Here are some general resources in addition:
 - [PyTorch.org](https://pytorch.org/) - the general cite for all PyTorch docs, tutorials, educational pointers, installation and blogs.
-- [PyTorch.org/tutorials](https://pytorch.org/tutorials) - the direct link to pytorch tutorials and recipes with recipes being more focused 'how tos' vs. tutorials which are end to end workflows.
+- [PyTorch.org/tutorials](https://pytorch.org/tutorials) - the direct link to PyTorch tutorials and recipes with recipes being more focused 'how tos' vs. tutorials which are end to end workflows.
 - [PyTorch Hub](https://pytorch.org/hub/) - a central place to find pretrained models targeting anything from audio to nlp to generative networks.
 - [Tools & Libraries](https://pytorch.org/ecosystem/) - a place to learn about the community projects that are well tested, supported and include everything from medical imaging to operationalization of PyTorch models.
 - [Discussion forums](https://discuss.pytorch.org/) - A community of over 31 thousand users and experts helping eachother use PyTorch.
