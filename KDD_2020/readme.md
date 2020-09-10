@@ -12,6 +12,8 @@ The material will be presented in the following talks:
 
 The tutorial will start with basic concepts and will proceed into more advanced topics following a chronological order of the presentations. The audience is expected to have some basic understanding of deep learning frameworks and models that will be supplemented with the material in the early talks. The audience will have an opportunity to learn more advanced topics and models as the tutorial proceeds.
 
+Here are the links for all the [presentations](./presentations/) and [recordings](https://www.youtube.com/playlist?list=PL_lsbAsL_o2Cw0VXQ4Gd8B_5WUmZqQuIM).
+
 
 ### Relevant References
 
