@@ -17,6 +17,15 @@ The video describes a general process for getting your model into your project. 
 5. **Required:** `scripted_model = torch.jit.script(model)` will export your model to TorchScript
 6. `torch.jit.save(scripted_model, 'model.pt')` saves your model to a file
 
+For your convenience, copy the code below to test out the model creation:
+```
+import torch
+import torchvision
+model = torchvision.models.mobilenet_v2(pretrained=True)
+scripted_model = torch.jit.script(model)
+torch.jit.save(scripted_model, 'model.pt')
+```
+
 ## Project Notes
 
 * This project is intended to be used with PyTorch 1.5 or higher, and Android Studio 3.5 or higher.
