@@ -1,20 +1,20 @@
 PODS:
-  - LibTorch (1.5.0):
-    - LibTorch/Core (= 1.5.0)
-  - LibTorch/Core (1.5.0):
+  - LibTorch (1.6.0):
+    - LibTorch/Core (= 1.6.0)
+  - LibTorch/Core (1.6.0):
     - LibTorch/Torch
-  - LibTorch/Torch (1.5.0)
+  - LibTorch/Torch (1.6.0)
 
 DEPENDENCIES:
-  - LibTorch (~> 1.5.0)
+  - LibTorch (~> 1.6.0)
 
 SPEC REPOS:
   trunk:
     - LibTorch
 
 SPEC CHECKSUMS:
-  LibTorch: 6752ffb58ea396b672a2df6f14970bdbc7219de4
+  LibTorch: 5478f8eafc4915cc10502f68054018f99a2037b5
 
-PODFILE CHECKSUM: 8cce2cd60a49351fb0487a25d469cbfafd3c4d12
+PODFILE CHECKSUM: e7eed41a3006f372a133afff85ccb8a04c6dc65b
 
 COCOAPODS: 1.9.3
