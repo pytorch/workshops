@@ -14,7 +14,7 @@ To set this project up and run it in Xcode:
 
 ## Model Preparation
 
-The video describes a general process for getting your model into your project. If you'd like to try the pre-trained MobileNetV2 model used in the video, follow these steps in a Python environment with PyTorch 1.5 or higher and TorchVision 0.6 or higher installed:
+The video describes a general process for getting your model into your project. If you'd like to try the pre-trained MobileNetV2 model used in the video, follow these steps in a Python environment with PyTorch 1.6 or higher and TorchVision 0.7 or higher installed:
 
 1. `python` - open a Python REPL; the rest of the steps will be completed there
 2. `import torch` and `import torchvision`
@@ -25,9 +25,18 @@ The video describes a general process for getting your model into your project. 
 
 You should now have a file called `model.pt` that you can use in your mobile project.
 
+For your convenience, copy the code below and run in Python with PyTorch 1.6 to test out the model creation:
+```
+import torch
+import torchvision
+model = torchvision.models.mobilenet_v2(pretrained=True)
+scripted_model = torch.jit.script(model)
+torch.jit.save(scripted_model, 'model.pt')
+```
+
 ## Project Notes
 
-* This project is intended to be used with PyTorch 1.5 or higher, and Xcode 11.4 or higher.
+* This project has been updated and tested with PyTorch 1.6, and Xcode 11.7.
 * If you want to upgrade the version of the PyTorch mobile runtime you're using, you can use the `pod update` command.
 * The first time you run the app and press the "Infer" button, it may take a while to load the model and run the inference. Subsequent inferences will be quicker.
 
