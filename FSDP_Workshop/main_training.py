@@ -296,7 +296,7 @@ def fsdp_main(args):
     # grammar correction
     tokenizer = AutoTokenizer.from_pretrained(cfg.tokenizer, model_max_length=512)
 
-    model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name, use_cache=False)
 
     if rank == 0:
         print(f"--> Training for {model_name}")
