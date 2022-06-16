@@ -6,6 +6,9 @@ class benchmark_config:
     # general
     host_port: str = "12368"
 
+    # seed
+    seed: int = 2022
+
     # model
     model_name = "t5-small"  # "google/t5-v1_1-small"
     tokenizer = "t5-large"
@@ -25,14 +28,14 @@ class benchmark_config:
 
     # policies
     fsdp_unit_size = 1000000
-    use_mixed_precision: bool = False
+    use_mixed_precision: bool = True
     use_fp16: bool = False
 
     hf_activation_checkpointing: bool = False
     fsdp_activation_checkpointing: bool = False
 
     # datasets
-    dataset_train = "datasets_grammar/grammar_train.csv"  # grammar_13k.csv
+    dataset_train = "datasets_grammar/grammar_train.csv"
     dataset_test = "datasets_grammar/grammar_validation.csv"
 
     # training

@@ -3,7 +3,7 @@
 
 import os
 import argparse
-from datasets_grammar.grammar_dataset import grammar
+import datasets_grammar as dg
 
 import torch
 import torch.nn as nn
@@ -52,7 +52,7 @@ from torch.utils.data import DataLoader
 from pathlib import Path
 from torch.utils.data import DataLoader
 
-from optimF import ChildTuningAdamW
+from ChildTuningOptimizer import ChildTuningAdamW
 
 # from sklearn.model_selection import train_test_split
 import time
@@ -207,25 +207,13 @@ def train(
         for key in batch.keys():
             batch[key] = batch[key].to(local_rank)
 
-        print("************************")
-        print(
-            "train_loader",
-            type(batch),
-            batch["source_ids"].size(),
-            batch["source_mask"].size(),
-            batch["target_ids"].size(),
-        )
-        print("************************")
-
         optimizer.zero_grad()
         output = model(
             input_ids=batch["source_ids"],
             attention_mask=batch["source_mask"],
             labels=batch["target_ids"],
         )
-        # print("##############################")
-        # print(output.keys())
-        # print("##############################")
+
         loss = output["loss"]
         if scaler:
             scaler.scale(loss).backward()
@@ -304,6 +292,9 @@ def fsdp_main(args):
     cfg = config.benchmark_config()  # loads from defaults
     print(f"--> Running with benchmark configs!")
 
+    torch.manual_seed(cfg.seed)
+    torch.cuda.manual_seed(cfg.seed)
+
     # torchrun specific
     local_rank = int(os.environ["LOCAL_RANK"])
     rank = int(os.environ["RANK"])
@@ -377,7 +368,6 @@ def fsdp_main(args):
     if 0 == os.getenv("RANK"):
         print(f"--> Training Set Len = {len(train_dataset)}")
         print(f"using dataset {train_name}")
-    # print("bailing")
 
     val_dataset = dg.get_dataset(tokenizer, cfg.dataset_test, 512, 512, True)
     if 0 == os.getenv("RANK"):
@@ -407,13 +397,6 @@ def fsdp_main(args):
     torch.cuda.set_device(local_rank)
     clear_gpu_cache(local_rank)
 
-    # init_start_event = torch.cuda.Event(enable_timing=True)
-    # init_end_event = torch.cuda.Event(enable_timing=True)
-
-    # init_start_event.record()
-
-    # model = model.to(rank)
-    # model = DDP(model)
     if cfg.hf_activation_checkpointing:
         model.gradient_checkpointing_enable()
         print(f"HF Activation checkpointing enabled\n")
@@ -424,8 +407,6 @@ def fsdp_main(args):
         mixed_precision=mp_policy,
         device_id=torch.cuda.current_device(),
     )
-    # move model to gpu
-    # model.to(local_rank)
 
     if cfg.fsdp_activation_checkpointing:
         policies.apply_checkpointing(model)
@@ -541,41 +522,6 @@ def fsdp_main(args):
                 mem_alloc_tracker.append(torch.cuda.memory_allocated())
                 mem_reserved_tracker.append(torch.cuda.memory_reserved())
 
-        """if cfg.save_model and curr_val_loss < best_val_loss:
-            # update curr best val accuracy
-
-            # save
-            # todo -remove
-            dist.barrier()
-            if rank == 0:
-                print(f"--> dist barrier activated")
-            if rank == 0:
-                print(f"--> entering save model state...")
-            save_policy = FullStateDictConfig(offload_to_cpu=True, rank0_only=True)
-            with FSDP.state_dict_type(
-                model, StateDictType.FULL_STATE_DICT, save_policy
-            ):
-                cpu_state = model.state_dict()
-            # states = model.state_dict()
-            print(f"saving process: rank {rank}  done w state_dict")
-            # dist.barrier()
-            # print(f"rank {rank}  done w 2nd barrier")
-
-            if rank == 0:
-                print(f"--> saving model ...")
-                currEpoch = (
-                    "-" + str(epoch) + "-" + str(round(curr_val_loss.item(), 4)) + ".pt"
-                )
-                model_save_name = "-" + time_of_run + "-" + save_name + currEpoch
-
-                torch.save(cpu_state, model_save_name)
-
-                print(f"--> saved {model_save_name} to disk")
-            # todo- remove
-            dist.barrier()
-            if rank == 0:
-                print(f"--> dist barrier removed.")
-        """
         # announce new val loss record:
         if rank == 0 and curr_val_loss < best_val_loss:
 
@@ -607,19 +553,6 @@ def fsdp_main(args):
             print(
                 f"CUDA Memory Summary After Last training:\n {torch.cuda.memory_summary()}"
             )
-        # print(
-        # f"Cuda event elapsed time: {init_start_event.elapsed_time(init_end_event) / 1000}sec"
-        # )
-        # print(f"{model}")
-
-        # save block
-        # save_model = cfg.save_model
-
-        # debug hang
-        # runs on all ranks
-        # print(f"rank {rank} calling barrier")
-        # dist.barrier()
-        # print(f"rank {rank} done w barrier, calling state_dict")
 
     dist.barrier()
     cleanup()
@@ -632,34 +565,7 @@ if __name__ == "__main__":
 
     args = parse_args()
 
-    # seed
-    torch.manual_seed(2022)
     gpus_per_node = torch.cuda.device_count()
 
     # torch run start
     fsdp_main(args)
-
-    # cache workaround
-    """ dataset_name = "grammar_train.csv"
-    full_path_dataset = Path.cwd()/'datasets_grammar'/dataset_name
-
-    temp_full_dataset = load_dataset(
-        "csv",
-        data_files={
-            "train": [full_path_dataset]
-        },  # "eval": "grammar_validation.csv"},
-        delimiter=",",
-    )
-    print(f"temp dset loaded in main = len {len(temp_full_dataset)}")
-    
-
-    mp.spawn(
-        fsdp_main,
-        args=(
-            gpus_per_node,
-            args,
-        ),
-        nprocs=gpus_per_node,
-        join=True,
-    )
-    """
