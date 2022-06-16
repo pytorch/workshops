@@ -1,4 +1,5 @@
-# main hq file for t5 training and prediction
+# main benchmark file for t5 training and prediction
+# use this to run fast test and/or profile with
 
 import os
 import argparse
@@ -51,8 +52,6 @@ from torch.utils.data import DataLoader
 from pathlib import Path
 from torch.utils.data import DataLoader
 
-# from nlp import load_metric
-# from nlp import load_dataset
 from optimF import ChildTuningAdamW
 
 # from sklearn.model_selection import train_test_split
