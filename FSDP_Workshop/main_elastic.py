@@ -1,4 +1,4 @@
-# main hq file for t5 training and prediction
+# main hq file for t5 training
 
 import os
 import argparse
@@ -8,9 +8,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-
-# from torchvision import datasets, transforms
-
 
 # for grammar correction
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
@@ -53,7 +50,7 @@ from torch.utils.data import DataLoader
 
 # from nlp import load_metric
 # from nlp import load_dataset
-from optimF import ChildTuningAdamW
+from ChildTuningOptimizer import ChildTuningAdamW
 
 from sklearn.model_selection import train_test_split
 import time
@@ -68,8 +65,6 @@ import tqdm
 
 # config
 import config
-
-from madgrad import MirrorMADGRAD as mirror
 
 # some globals
 g_gigabyte = 1024**3
@@ -104,7 +99,7 @@ def parse_args():
 
 
 # ----------------   Main functions --------------------
-def get_policies(cfg, fsdp_unit_params=1000000):
+def get_policies(cfg):
 
     """establish current policies for mixed precision and fsdp wrapping"""
 
@@ -122,21 +117,14 @@ def get_policies(cfg, fsdp_unit_params=1000000):
             # mixed_precision_policy = policies.fpSixteen
             print(f"bFloat16 support not present. Not using for mixed precision")
 
-    # wrapping policy -------
-    # print(f"**overriding mp to fp16 - remove")
-    # mixed_precision_policy = policies.fpSixteen
-
     wrapping_policy = policies.get_t5_wrapper()
 
     return mixed_precision_policy, wrapping_policy
 
 
 def setup(rank, world_size, cfg):
-    # os.environ["MASTER_ADDR"] = g_addr
-    # os.environ["MASTER_PORT"] = cfg.host_port
-
     # initialize the process group
-    dist.init_process_group("nccl")  # , rank=rank, world_size=world_size)
+    dist.init_process_group("nccl")
 
 
 def setup_environ_flags(cfg, rank):
@@ -193,31 +181,19 @@ def train(
         sampler.set_epoch(epoch)
     if rank == 0:
         inner_pbar = tqdm.tqdm(
-            range(len(train_loader)), colour="blue", desc="r0 Training Epoch"
+            range(len(train_loader)), colour="blue", desc="Training Epoch"
         )
     for batch in train_loader:
         for key in batch.keys():
             batch[key] = batch[key].to(local_rank)
 
-        """print("************************")
-        print(
-            "train_loader",
-            type(batch),
-            batch["source_ids"].size(),
-            batch["source_mask"].size(),
-            batch["target_ids"].size(),
-        )
-        print("************************")
-        """
         optimizer.zero_grad()
         output = model(
             input_ids=batch["source_ids"],
             attention_mask=batch["source_mask"],
             labels=batch["target_ids"],
         )
-        # print("##############################")
-        # print(output.keys())
-        # print("##############################")
+
         loss = output["loss"]
         loss.backward()
         optimizer.step()
@@ -233,9 +209,7 @@ def train(
     if rank == 0:
         inner_pbar.close()
 
-        print(
-            f"Train Epoch: \t{epoch}, Loss: \t{train_accuracy:.4f}"
-        )  # .format(epoch, train_accuracy))
+        print(f"Train Epoch: \t{epoch}, Loss: \t{train_accuracy:.4f}")
     return train_accuracy
 
 
@@ -264,17 +238,11 @@ def validation(model, local_rank, rank, world_size, test_loader):
 
             if rank == 0:
                 inner_pbar.update(1)
-            # pred = output.logits.argmax(
-            #    dim=1, keepdim=True
-            # )  # get the index of the max log-probability
-            # ddp_loss[1] += pred.eq(batch["target_ids"].view_as(pred)).sum().item()
-            # ddp_loss[2] += len(batch)
 
     dist.all_reduce(ddp_loss, op=dist.ReduceOp.SUM)
     val_loss = ddp_loss[0] / ddp_loss[1]
 
     if rank == 0:
-        # test_loss = ddp_loss[0] / ddp_loss[1]
         inner_pbar.close()
         print(f"Validation Loss: {val_loss:.4f}")
     return val_loss
@@ -285,10 +253,11 @@ def validation(model, local_rank, rank, world_size, test_loader):
 
 def fsdp_main(args):
     """main process within each process"""
-    torch.cuda.manual_seed(22)
-    torch.manual_seed(22)
 
     cfg = config.train_config()  # loads from defaults
+
+    torch.cuda.manual_seed(cfg.seed)
+    torch.manual_seed(cfg.seed)
 
     # torchrun specific
     local_rank = int(os.environ["LOCAL_RANK"])
@@ -310,12 +279,12 @@ def fsdp_main(args):
 
     mp_policy, wrapping_policy = get_policies(cfg, fsdp_unit_params)
 
-    model_name = cfg.model_name  # "google/t5-v1_1-small"  #   #
+    model_name = cfg.model_name  # "google/t5-v1_1-small"
     if rank == 0:
         print(f"--> training for model {model_name}")
 
     printable_model_name = str.replace(model_name, "/", "=")
-    file_save_name = "800M-whole-model-"  # printable_model_name + "-"
+    file_save_name = "ModelCheckPoint-"  # printable_model_name + "-"
 
     # t5-base
     # google/t5-v1_1-small
@@ -329,21 +298,10 @@ def fsdp_main(args):
 
     model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
-    # summarization
-    # model = T5ForConditionalGeneration.from_pretrained(model_name)
-    # tokenizer = T5Tokenizer.from_pretrained(model_name)
-    # dataset_name = "jfleg_train.csv"
-
     if rank == 0:
         print(f"--> Training for {model_name}")
         total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
         print(f"\n--> {model_name} has {total_params/1e6} Million params\n")
-
-        # print(f"{dataset_name} contains: {dataset.keys()}")
-        # print("Size of {dataset_name} train dataset: ", dataset["train"].shape)
-        # print(
-        #    "Size of {dataset_name} Validation dataset: ", dataset["validation"].shape
-        # )
 
     # ____________ create batch dataset
     train_name = None
@@ -384,16 +342,9 @@ def fsdp_main(args):
     torch.cuda.set_device(local_rank)
     clear_gpu_cache(local_rank)
 
-    # init_start_event = torch.cuda.Event(enable_timing=True)
-    # init_end_event = torch.cuda.Event(enable_timing=True)
-
-    # init_start_event.record()
-
-    # model = model.to(rank)
-    # model = DDP(model)
     if cfg.activation_checkpointing:
         model.gradient_checkpointing_enable()
-        print(f"Activation checkpointing enabled\n")
+        print(f"HF Activation checkpointing enabled\n")
 
     # --- sharding policy
     model_sharding_strategy = (
@@ -442,12 +393,9 @@ def fsdp_main(args):
                 reserve_p=cfg.percent_F,
                 mode="taskfree",
             )
-            print(f"--> child free tuning with {cfg.percent_F} percentage ")
-    elif cfg.use_mirror_optimizer:
-        optimizer = mirror(model.parameters(), lr=cfg.lr)
-        if rank == 0:
-            print(f"--> using Mirror optimizer with lr = {cfg.lr}")
-
+            print(
+                f"--> Optimizer - Child Task Free tuning with {cfg.percent_F} percentage "
+            )
     else:
         optimizer = optim.AdamW(model.parameters(), lr=lr)
         print(f"--> AdamW whole model tuning with ")
@@ -586,19 +534,7 @@ def fsdp_main(args):
             print(
                 f"CUDA Memory Summary After Last training:\n {torch.cuda.memory_summary()}"
             )
-        # print(
-        # f"Cuda event elapsed time: {init_start_event.elapsed_time(init_end_event) / 1000}sec"
-        # )
-        # print(f"{model}")
-
-        # save block
-        # save_model = cfg.save_model
-
-        # debug hang
-        # runs on all ranks
-        # print(f"rank {rank} calling barrier")
-        # dist.barrier()
-        # print(f"rank {rank} done w barrier, calling state_dict")
+        
 
     dist.barrier()
     cleanup()
@@ -612,33 +548,9 @@ if __name__ == "__main__":
     args = parse_args()
 
     # seed
-    torch.manual_seed(2022)
     gpus_per_node = torch.cuda.device_count()
 
     # torch run start
     fsdp_main(args)
 
-    # cache workaround
-    """ dataset_name = "grammar_train.csv"
-    full_path_dataset = Path.cwd()/'datasets_grammar'/dataset_name
-
-    temp_full_dataset = load_dataset(
-        "csv",
-        data_files={
-            "train": [full_path_dataset]
-        },  # "eval": "grammar_validation.csv"},
-        delimiter=",",
-    )
-    print(f"temp dset loaded in main = len {len(temp_full_dataset)}")
     
-
-    mp.spawn(
-        fsdp_main,
-        args=(
-            gpus_per_node,
-            args,
-        ),
-        nprocs=gpus_per_node,
-        join=True,
-    )
-    """
