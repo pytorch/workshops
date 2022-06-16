@@ -7,6 +7,9 @@ class train_config:
     # general
     host_port: str = "12368"
 
+    # seed
+    seed: int = 2022
+
     # model
     model_name = "google/t5-v1_1-small"  # "google/t5-v1_1-small"
     tokenizer = "t5-large"

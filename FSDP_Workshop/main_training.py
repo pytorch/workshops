@@ -277,7 +277,7 @@ def fsdp_main(args):
 
     val_batch_size = cfg.val_batch_size
 
-    mp_policy, wrapping_policy = get_policies(cfg, fsdp_unit_params)
+    mp_policy, wrapping_policy = get_policies(cfg)
 
     model_name = cfg.model_name  # "google/t5-v1_1-small"
     if rank == 0:
