@@ -34,7 +34,7 @@ from torch.distributed.fsdp import (
     StateDictType,
 )
 
-
+ShardingStrategy.SHARD_GRAD_OP
 from torch.distributed.fsdp.wrap import (
     transformer_auto_wrap_policy,
     enable_wrap,
@@ -43,13 +43,12 @@ from torch.distributed.fsdp.wrap import (
 
 from policies import mixed_precision
 
+
 from datasets import load_dataset, load_metric
 from torch.utils.data import DataLoader
 from pathlib import Path
 from torch.utils.data import DataLoader
 
-# from nlp import load_metric
-# from nlp import load_dataset
 from ChildTuningOptimizer import ChildTuningAdamW
 
 from sklearn.model_selection import train_test_split
@@ -59,6 +58,9 @@ from datetime import datetime
 # local imports
 import verify
 import policies
+import model_checkpoints
+from collections import deque
+
 
 import datasets_grammar as dg
 import tqdm
@@ -222,7 +224,7 @@ def validation(model, local_rank, rank, world_size, test_loader):
     ddp_loss = torch.zeros(3).to(local_rank)
     if rank == 0:
         inner_pbar = tqdm.tqdm(
-            range(len(test_loader)), colour="green", desc="r0 Validation Epoch"
+            range(len(test_loader)), colour="green", desc="Validation Epoch"
         )
     with torch.no_grad():
         for batch in test_loader:
@@ -312,7 +314,7 @@ def fsdp_main(args):
     if 0 == os.getenv("RANK"):
         print(f"--> Training Set Len = {len(train_dataset)}")
         print(f"using dataset {train_name}")
-    # print("bailing")
+    
 
     val_dataset = dg.get_dataset(tokenizer, cfg.dataset_test, 512, 512, True)
     if 0 == os.getenv("RANK"):
@@ -393,12 +395,14 @@ def fsdp_main(args):
                 reserve_p=cfg.percent_F,
                 mode="taskfree",
             )
-            print(
-                f"--> Optimizer - Child Task Free tuning with {cfg.percent_F} percentage "
+            if rank==0:
+                print(
+                f"--> Optimizer - Child Task Free tuning with {cfg.percent_F} percentage and lr of {lr} "
             )
     else:
         optimizer = optim.AdamW(model.parameters(), lr=lr)
-        print(f"--> AdamW whole model tuning with ")
+        if rank==0:
+            print(f"--> AdamW whole model tuning with lr of {lr} ")
 
     scheduler = StepLR(optimizer, step_size=1, gamma=gamma)
     epochs = cfg.num_epochs
@@ -414,6 +418,7 @@ def fsdp_main(args):
         dur = []
         train_acc_tracking = []
         val_acc_tracking = []
+        dq = deque(maxlen=cfg.checkpoint_max_save_count+1)
         training_start_time = time.time()
 
     torch_profiler = None
@@ -502,6 +507,10 @@ def fsdp_main(args):
                 torch.save(cpu_state, save_name)
 
                 print(f"--> saved {save_name} to disk")
+                dq.append(save_name)
+                # only keep a rolling number of model files to avoid excessive disk space use
+                model_checkpoints.prune_checkpoints(rank, dq, cfg)
+                
 
         # announce new val loss record:
         if rank == 0 and curr_val_loss < best_val_loss:

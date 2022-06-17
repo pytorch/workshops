@@ -23,6 +23,9 @@ class train_config:
 
     # save models
     save_model: bool = True
+    checkpoint_max_save_count: int = (
+        3  # number of 'best' checkpoints to save based on val loss
+    )
     save_folder = "model_checkpoints"
 
     # sharding policy
@@ -34,7 +37,7 @@ class train_config:
 
     # policies
     fsdp_unit_size = 1000000
-    use_mixed_precision: bool = False
+    use_mixed_precision: bool = True
 
     activation_checkpointing: bool = True
 
@@ -44,10 +47,10 @@ class train_config:
 
     # training
     batch_size: int = 32
-    num_epochs: int = 1
+    num_epochs: int = 5
 
     # validation
-    run_validation: bool = False
+    run_validation: bool = True
     val_batch_size = 16
     block_for_validation: bool = False
 
