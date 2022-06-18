@@ -201,7 +201,7 @@ def train(
         sampler.set_epoch(epoch)
     if rank == 0:
         inner_pbar = tqdm.tqdm(
-            range(len(train_loader)), colour="blue", desc="r0 Training Epoch"
+            range(len(train_loader)), colour="blue", desc="Training Epoch"
         )
     for batch in train_loader:
         for key in batch.keys():
@@ -251,7 +251,7 @@ def validation(cfg, model, local_rank, rank, world_size, test_loader, scaler):
     ddp_loss = torch.zeros(3).to(local_rank)
     if rank == 0:
         inner_pbar = tqdm.tqdm(
-            range(len(test_loader)), colour="green", desc="r0 Validation Epoch"
+            range(len(test_loader)), colour="green", desc="Validation Epoch"
         )
     with torch.no_grad():
         for batch in test_loader:
@@ -441,7 +441,8 @@ def fsdp_main(args):
         )
     else:
         optimizer = optim.AdamW(model.parameters(), lr=lr)
-        print(f"--> optimizer is AdamW")
+        if rank==0:
+            print(f"--> optimizer is AdamW")
 
     scheduler = StepLR(optimizer, step_size=1, gamma=gamma)
     epochs = cfg.num_epochs

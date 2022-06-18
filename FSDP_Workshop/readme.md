@@ -32,7 +32,7 @@ Successfully installed datasets-2.2.2 dill-0.3.4 huggingface-hub-0.7.0 multiproc
 
 3 - Uninstall any existing torch and torch libraries.  We will use the latest torch nightly build to ensure all FSDP features are available:
 ~~~
-pip uninstall torch torchaudio torchvision
+pip uninstall torch torchaudio torchvision -y 
 ~~~
 
 Assuming Linux:
@@ -40,3 +40,17 @@ Assuming Linux:
 pip3 install --pre torch torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cu113
 ~~~~
 (or check for the command line needed for other OS at: https://pytorch.org/get-started/locally/ )
+
+## Verify everything is working with benchmark
+Let's run a simple benchmark of 3 epochs using t5-small to quickly confirm FSDP is working properly on your system before beginning training of the full size model.
+
+We'll launch using a bash script which has all the parameters needed for torchrun.  It defaults to asssuming 8 GPU's.  Thus, if needed please adjust run_benchmark.sh to your total GPUs in the 'nproc per node' setting:
+~~~
+torchrun --nnodes=1 --nproc_per_node=8 --rdzv_id=101 --rdzv_endpoint="localhost:5679" main_benchmark.py
+~~~~
+
+After confirming GPU count, you can run the benchmark directly with:
+~~~
+bash run_benchmark.sh
+~~~
+
