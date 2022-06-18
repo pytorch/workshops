@@ -42,7 +42,7 @@ pip3 install --pre torch torchvision --extra-index-url https://download.pytorch.
 (or check for the command line needed for other OS at: https://pytorch.org/get-started/locally/ )
 
 ## Verify everything is working with benchmark
-Let's run a simple benchmark of 3 epochs using t5-small to quickly confirm FSDP is working properly on your system before beginning training of the full size model.
+Let's run a simple benchmark of 2 epochs using t5-small to quickly confirm FSDP is working properly on your system before beginning training of the full size model.  Run time varies based on system, but it's usually < 2 minutes for 2 epochs. 
 
 We'll launch using a bash script which has all the parameters needed for torchrun.  It defaults to asssuming 8 GPU's.  Thus, if needed please adjust run_benchmark.sh to your total GPUs in the 'nproc per node' setting:
 ~~~
@@ -53,4 +53,14 @@ After confirming GPU count, you can run the benchmark directly with:
 ~~~
 bash run_benchmark.sh
 ~~~
+
+The settings for this run are controlled by the config/benchmark.py file which has a config dataclass.  The benchmark will check if you have bfloat16 support (Ampere card ala A100, 3090, etc). and use Bfloat16 via FSDP Mixed precision if support is there, or fall back to fp32 for non-Ampere. 
+
+You should see something like this:
+<img width="1478" alt="benchmark_workshop" src="https://user-images.githubusercontent.com/46302957/174460529-0f15dd96-9319-43d8-855c-1a4466ac231f.png">
+
+If so, you've successfully trained an NLP model using FSDP!  
+
+This was just a quick test to ensure everything was setup.  Now let's move to training a usable model. 
+
 
