@@ -54,3 +54,12 @@ After confirming GPU count, you can run the benchmark directly with:
 bash run_benchmark.sh
 ~~~
 
+Training a large model:
+Training of the full grammar checker will use the settings found in config/defaults.py.  
+The default model is t5_1_1-large, or 737M parameter, but you are welcome to go larger or smaller depending on your single node capacity. You can adjust it easily in the defaults.py file:
+
+
+
+
+
+
