@@ -28,7 +28,6 @@ class train_config:
     checkpoint_max_save_count: int = (
         2  # number of 'best' checkpoints to save based on val loss
     )
-    save_folder = "model_checkpoints"
 
     # sharding policy
     sharding_strategy: ShardingStrategy = ShardingStrategy.FULL_SHARD
@@ -48,7 +47,7 @@ class train_config:
     dataset_test = "datasets_grammar/grammar_validation.csv"
 
     # training
-    batch_size: int = 32
+    batch_size: int = 16
     num_epochs: int = 8
 
     # validation
