@@ -84,6 +84,13 @@ With that you are ready to start training!
 bash run_training.sh
 ~~~
 
+With that, your training will start with an ETA per epoch listed on the right of the progress bar.  The training will auto-save the best 2 models on a rolling basis, using the validation loss as the save metric. 
+
+<img width="494" alt="workshop_training" src="https://user-images.githubusercontent.com/46302957/174461818-21258acc-6da5-49dc-af04-5e898d10c0b8.png">
+
+The saved models will also have a time_stamp and validation loss and epoch number in the file name, and saved to your main training directory. 
+
+
 
 
 
