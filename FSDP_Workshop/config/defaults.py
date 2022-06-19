@@ -9,22 +9,24 @@ class train_config:
 
     # seed
     seed: int = 2022
-
+    
+    
     # model
-    model_name = "google/t5-v1_1-base"  # "google/t5-v1_1-small"
-    tokenizer = "t5-large"
+    model_name = "google/t5-v1_1-large"  # << - adjust model size here
+    
     # available models
-    ## t5-base
-    # google/t5-v1_1-small
-    # google/t5-v1_1-base
-    # google/t5-v1_1-large
-    # google/t5-v1_1-xl  #3b
-    # google/t5-v1_1-xxl #11b
+    # google/t5-v1_1-small  # 60 M
+    # google/t5-v1_1-base   # 223 M
+    # google/t5-v1_1-large  # 737 M
+    # google/t5-v1_1-xl     # 3 Billion
+    # google/t5-v1_1-xxl    # 11 Billion 
+
+    tokenizer = "t5-large"   # no need to adjust, tokenizer works for all model sizes
 
     # save models
     save_model: bool = True
     checkpoint_max_save_count: int = (
-        3  # number of 'best' checkpoints to save based on val loss
+        2  # number of 'best' checkpoints to save based on val loss
     )
     save_folder = "model_checkpoints"
 
@@ -42,12 +44,12 @@ class train_config:
     activation_checkpointing: bool = True
 
     # datasets
-    dataset_train = "datasets_grammar/grammar_train.csv"
+    dataset_train = "datasets_grammar/gtrain_150K.csv"
     dataset_test = "datasets_grammar/grammar_validation.csv"
 
     # training
     batch_size: int = 32
-    num_epochs: int = 5
+    num_epochs: int = 8
 
     # validation
     run_validation: bool = True
