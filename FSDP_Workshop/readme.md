@@ -64,9 +64,27 @@ If so, you've successfully trained an NLP model using FSDP!
 This was just a quick test to ensure everything was setup.  Now let's move to training a usable model. 
 
 To train a full model, we'll switch to using the launcher in run_training.sh, which defaults to 8 GPU.  Thus adjust if needed to your number of GPU's. 
-From there, the settings for the model size to train can be found in config/defaults.py.  It's setup to train a 737M model, but can easily be changed to 3B or 11B depending on your node capacity.
+From there, the settings for the model size to train can be found in config/defaults.py.    It's setup to train a 737M model, but can easily be changed to 3B or 11B depending on your node capacity.
+
 
 <img width="955" alt="workshop_config_models_sizes" src="https://user-images.githubusercontent.com/46302957/174461443-2ed75fbb-ffc5-49e8-a0e6-249b49ce2c6f.png">
+
+You can adjust your batch size for both training and validation in the same config/defaults.py, as well as the epochs to train.  We'll be using a much larger dataset for the training than the benchmark and use a 150K sample dataset.  Typically this converges in around 6-12 epochs, depending on model size. 
+
+<img width="742" alt="training_epochs" src="https://user-images.githubusercontent.com/46302957/174461542-18ae4ab1-b3b9-49e6-b3e8-b12277f8a84a.png">
+
+In addition, the default is to use Child Fine Tuning, which has shown to outperform whole model fine tuning.  We are thus training a subset of the whole model but unlike layer freezing, we'll be freezing some portion of all layers as determined by the percent_F setting.  
+0.35 has proven to be very effective for the grammer checker, so that is the default:
+
+<img width="494" alt="fine_tuning" src="https://user-images.githubusercontent.com/46302957/174461576-dca97e98-7118-4948-bc9d-f9de7e389fe1.png">
+
+With that you are ready to start training!
+
+~~~
+bash run_training.sh
+~~~
+
+
 
 
 
