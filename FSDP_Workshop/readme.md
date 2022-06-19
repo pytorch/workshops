@@ -63,4 +63,10 @@ If so, you've successfully trained an NLP model using FSDP!
 
 This was just a quick test to ensure everything was setup.  Now let's move to training a usable model. 
 
+To train a full model, we'll switch to using the launcher in run_training.sh, which defaults to 8 GPU.  Thus adjust if needed to your number of GPU's. 
+From there, the settings for the model size to train can be found in config/defaults.py.  It's setup to train a 737M model, but can easily be changed to 3B or 11B depending on your node capacity.
+
+<img width="955" alt="workshop_config_models_sizes" src="https://user-images.githubusercontent.com/46302957/174461443-2ed75fbb-ffc5-49e8-a0e6-249b49ce2c6f.png">
+
+
 
