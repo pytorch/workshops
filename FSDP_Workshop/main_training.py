@@ -6,9 +6,11 @@
 
 
 # main hq file for t5 training
+# general code comments added for clarity
 
 import os
 import argparse
+# our custom dataset handler class
 from datasets_grammar.grammar_dataset import grammar
 
 import torch
@@ -31,6 +33,7 @@ import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data.distributed import DistributedSampler
 
+# main FSDP imports
 from torch.distributed.fsdp import (
     FullyShardedDataParallel as FSDP,
     CPUOffload,
@@ -41,13 +44,15 @@ from torch.distributed.fsdp import (
     StateDictType,
 )
 
-ShardingStrategy.SHARD_GRAD_OP
+
+# wrapping policy for determining FSDP units for sharding
 from torch.distributed.fsdp.wrap import (
     transformer_auto_wrap_policy,
     enable_wrap,
     wrap,
 )
 
+# control over mixed precision
 from policies import mixed_precision
 
 
@@ -131,11 +136,12 @@ def get_policies(cfg):
     return mixed_precision_policy, wrapping_policy
 
 
+# distributed setup
 def setup(rank, world_size, cfg):
     # initialize the process group
     dist.init_process_group("nccl")
 
-
+# various debug settings (show C++ stack if crash, etc.)
 def setup_environ_flags(cfg, rank):
     os.environ["TORCH_SHOW_CPP_STACKTRACES"] = str(1)
     if cfg.nccl_debug_handler:
@@ -171,6 +177,7 @@ def format_metrics_to_gb(item):
 
 
 # ----------  Training ----------------------------------------------------------
+# our train function, called per epoch
 def train(
     args,
     model,
@@ -213,6 +220,7 @@ def train(
         if profiler:
             profiler.step()
 
+    # consolidate final loss number - do not use .reduce here, requires global synch
     dist.all_reduce(ddp_loss, op=dist.ReduceOp.SUM)
     train_accuracy = ddp_loss[0] / ddp_loss[1]
     if rank == 0:
@@ -223,7 +231,7 @@ def train(
 
 
 # ---- Validation ---------------
-
+# validation function for one epoch of validation
 
 def validation(model, local_rank, rank, world_size, test_loader):
     model.eval()
@@ -261,10 +269,11 @@ def validation(model, local_rank, rank, world_size, test_loader):
 
 
 def fsdp_main(args):
-    """main process within each process"""
+    """main process, run within each individual GPU process"""
 
     cfg = config.train_config()  # loads from defaults
 
+    # ensure reproducibility
     torch.cuda.manual_seed(cfg.seed)
     torch.manual_seed(cfg.seed)
 
@@ -279,7 +288,8 @@ def fsdp_main(args):
 
     setup_tasks(rank, world_size, cfg)
 
-    fsdp_unit_params = cfg.fsdp_unit_size
+    # fsdp_unit_params = cfg.fsdp_unit_size  
+
     batch_size = cfg.batch_size
     if rank == 0:
         print(f"\n BatchSize = {batch_size}\n")
@@ -302,7 +312,7 @@ def fsdp_main(args):
     # google/t5-v1_1-xl  #3b
     # google/t5-v1_1-xxl #11b
 
-    # grammar correction
+    # grammar correction setup - uses HF tokenizer and wrapped T5 model
     tokenizer = AutoTokenizer.from_pretrained(cfg.tokenizer, model_max_length=512)
 
     model = AutoModelForSeq2SeqLM.from_pretrained(model_name, use_cache=False)
@@ -351,6 +361,7 @@ def fsdp_main(args):
     torch.cuda.set_device(local_rank)
     clear_gpu_cache(local_rank)
 
+    # HF checkpointing...
     if cfg.activation_checkpointing:
         model.gradient_checkpointing_enable()
         print(f"HF Activation checkpointing enabled\n")
@@ -362,8 +373,10 @@ def fsdp_main(args):
     if rank == 0:
         print(f"Sharding strategy = {model_sharding_strategy}")
 
-    # move model to gpu
-    # model.to(local_rank)
+    
+    # Main FSDP call - this inits FSDP with our model and FSDP will create the sharding plan
+    # and stream the shards to each GPU.
+    # we also pass in our mixed precision policy here
 
     model = FSDP(
         model,
@@ -373,6 +386,7 @@ def fsdp_main(args):
         device_id=torch.cuda.current_device(),  # streaming init
     )
 
+    #optional - you can print the sharding plan to see how FSDP has structured the layout.
     if rank == 0 and cfg.print_sharding_plan:
         print(f"model ")
         fn = printable_model_name + "-sharded_layout.txt"
@@ -393,6 +407,8 @@ def fsdp_main(args):
 
     lr = 0.0008
     gamma = 0.85
+
+    # we can train with either ChildTuning (recommended) or whole model fine tuning.
     if cfg.use_child_tuning:
         if cfg.use_task_free:
             optimizer = ChildTuningAdamW(
@@ -420,7 +436,7 @@ def fsdp_main(args):
     best_val_loss = float("inf")
     curr_val_loss = float("inf")
 
-    # --- main training loop - todo, this needs to be modularized
+    # --- main training loop 
     if rank == 0:
         dur = []
         train_acc_tracking = []
@@ -428,6 +444,8 @@ def fsdp_main(args):
         dq = deque(maxlen=cfg.checkpoint_max_save_count+1)
         training_start_time = time.time()
 
+    # you can run profiling by un-commenting the below section.  Note that you will likely want to just profile
+    # for a small set and smaller model (logs get very big, very fast).
     torch_profiler = None
     """with torch.profiler.profile(
         activities=[
@@ -443,10 +461,13 @@ def fsdp_main(args):
         record_shapes=True,
     ) as torch_profiler:
     """
+
     if rank == 0 and cfg.track_memory:
         fn = cfg.model_name + "memory_tracking.txt"
         mem_alloc_tracker = []
         mem_reserved_tracker = []
+
+    # -- Start Training -----
 
     for epoch in range(1, epochs + 1):
         if rank == 0:
@@ -488,6 +509,7 @@ def fsdp_main(args):
                     format_metrics_to_gb(torch.cuda.memory_reserved())
                 )
 
+        # save this epochs checkpoint if val loss is current best
         if cfg.save_model and curr_val_loss < best_val_loss:
             # update curr best val accuracy
 
@@ -535,6 +557,7 @@ def fsdp_main(args):
             print(f"epoch {i}, time {val:.2f}")
         print()
 
+        # training is done...show some training stats for memory use.
         # memory
         if cfg.track_memory:
             print(f"total memory reserved: {mem_reserved_tracker}")
@@ -551,7 +574,7 @@ def fsdp_main(args):
                 f"CUDA Memory Summary After Last training:\n {torch.cuda.memory_summary()}"
             )
         
-
+    # all done, set barrier to ensure all GPU's complete, and then cleanup 
     dist.barrier()
     cleanup()
 
@@ -561,10 +584,12 @@ def fsdp_main(args):
 
 if __name__ == "__main__":
 
-    args = parse_args()
+    args = parse_args()  # atm we don't use any args..available if needed.
 
-    # seed
-    gpus_per_node = torch.cuda.device_count()
+    # ensure your gpu node count is set via the run_training.sh file...
+    # you can un-comment below for check:
+    # gpus_per_node = torch.cuda.device_count()
+    # print(f" --> Total GPU count = {gpus_per_node}")
 
     # torch run start
     fsdp_main(args)
