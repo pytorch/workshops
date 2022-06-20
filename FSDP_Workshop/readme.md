@@ -55,6 +55,17 @@ We've included the processed/cleaned up dataset as train and test CSV files alre
 
 2 - C4 Synthetic grammar data:
 
+This is a massive synthetic dataset of 200M.  We only pull a subset of 150K, but show you how to create a much larger dataset as you wish in the dataset creation notebook (under datasets_grammer folder).
+
+General info:
+https://ai.googleblog.com/2021/08/the-c4200m-synthetic-dataset-for.html
+
+Github repo:
+https://github.com/google-research-datasets/C4_200M-synthetic-dataset-for-grammatical-error-correction
+
+Paper and credit:
+https://aclanthology.org/2021.bea-1.4/
+
 
 
 
