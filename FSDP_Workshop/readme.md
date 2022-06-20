@@ -1,4 +1,4 @@
-# t5_grammar_checker
+# T5 Grammar Checker, trained with FSDP
 T5 Grammar Checker model and workshop, trained using PyTorch FSDP
 
 Goal - train a 800M / 3B / 11B T5 Model to serve as a grammar checker using PyTorch FSDP.  We'll cover both single node (one machine, multi-gpu) and multi-node (2+ machines, each with multi-gpus) training scenarios.  
