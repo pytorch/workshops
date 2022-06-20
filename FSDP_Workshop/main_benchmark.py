@@ -1,3 +1,10 @@
+# Copyright (c) 2022 Meta Platforms, Inc. and its affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the Apache-style license found in the
+# LICENSE file in the root directory of this source tree.
+
+
 # main benchmark file for t5 training and prediction
 # use this to run fast test and/or profile with
 

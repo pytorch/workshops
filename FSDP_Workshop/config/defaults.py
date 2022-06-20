@@ -1,3 +1,9 @@
+# Copyright (c) 2022 Meta Platforms, Inc. and its affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the Apache-style license found in the
+# LICENSE file in the root directory of this source tree.
+
 from dataclasses import dataclass
 from torch.distributed.fsdp import ShardingStrategy
 
@@ -28,6 +34,7 @@ class train_config:
     checkpoint_max_save_count: int = (
         2  # number of 'best' checkpoints to save based on val loss
     )
+
 
     # sharding policy
     sharding_strategy: ShardingStrategy = ShardingStrategy.FULL_SHARD

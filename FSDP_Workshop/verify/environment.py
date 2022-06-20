@@ -1,3 +1,9 @@
+# Copyright (c) 2022 Meta Platforms, Inc. and its affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the Apache-style license found in the
+# LICENSE file in the root directory of this source tree.
+
 # auto check if bFloat16 is supported or not
 
 import torch
