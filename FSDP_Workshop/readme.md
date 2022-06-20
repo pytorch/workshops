@@ -41,6 +41,23 @@ pip3 install --pre torch torchvision --extra-index-url https://download.pytorch.
 ~~~~
 (or check for the command line needed for other OS at: https://pytorch.org/get-started/locally/ )
 
+## Datasets 
+We've used two datasets for training our grammar checker.  
+1 - JFLEG:  
+
+Courtney Napoles, Keisuke Sakaguchi and Joel Tetreault. (EACL 2017): JFLEG: A Fluency Corpus and Benchmark for Grammatical Error Correction. In Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics. Valencia, Spain. April 03-07, 2017.
+https://github.com/keisks/jfleg
+
+and downloadable from:
+https://huggingface.co/datasets/jfleg
+
+We've included the processed/cleaned up dataset as train and test CSV files already as grammar_train.csv and grammar_validation.csv.
+
+2 - C4 Synthetic grammar data:
+
+
+
+
 ## Verify everything is working with benchmark
 Let's run a simple benchmark of 2 epochs using t5-small to quickly confirm FSDP is working properly on your system before beginning training of the full size model.  Run time varies based on system, but it's usually < 2 minutes for 2 epochs. 
 
