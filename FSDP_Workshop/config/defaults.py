@@ -43,23 +43,25 @@ class train_config:
     # dataloaders
     num_workers_dataloader: int = 0
 
-    # policies
-    fsdp_unit_size = 1000000
+    # policies - this will default to BF16, but if no native support detected, will 
+    # use FP16.  (note that FP16 is not recommended for larger models...)
+
     use_mixed_precision: bool = True
 
-    activation_checkpointing: bool = True
+    HF_activation_checkpointing: bool = True
+    FSDP_activation_checkpointing: bool = False
 
     # datasets
-    dataset_train = "datasets_grammar/gtrain_150K.csv"
+    dataset_train = "datasets_grammar/grammar_train.csv" # gtrain_150K.csv
     dataset_test = "datasets_grammar/grammar_validation.csv"
 
     # training
-    batch_size: int = 16
+    batch_size: int = 8
     num_epochs: int = 8
 
     # validation
     run_validation: bool = True
-    val_batch_size = 16
+    val_batch_size = 8
     block_for_validation: bool = False
 
     # logging

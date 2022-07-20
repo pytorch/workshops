@@ -83,6 +83,7 @@ import config
 # some globals
 g_gigabyte = 1024**3
 
+bf16_ready = verify.bf16_ready
 
 def _is_rank_0():
     return 0 == os.getenv("RANK")
@@ -122,14 +123,13 @@ def get_policies(cfg):
 
     # mixed precision -----
     if cfg.use_mixed_precision:
-        bf16_ready = verify.bf16_ready
 
         if bf16_ready:
             mixed_precision_policy = policies.bfSixteen
-            print(f"bFloat16 enabled for mixed precision - using bfSixteen policy")
+            print(f"BFloat16 enabled for mixed precision - using bfSixteen policy")
         else:
-            # mixed_precision_policy = policies.fpSixteen
-            print(f"bFloat16 support not present. Not using for mixed precision")
+            mixed_precision_policy = policies.fpSixteen
+            print(f"BFloat16 support not present. Switching to FP16 with dynamic scaling.")
 
     wrapping_policy = policies.get_t5_wrapper()
 
@@ -189,6 +189,7 @@ def train(
     epoch,
     sampler=None,
     profiler=None,
+    scaler=None,
 ):
     model.train()
     ddp_loss = torch.zeros(2).to(local_rank)
@@ -211,10 +212,18 @@ def train(
         )
 
         loss = output["loss"]
-        loss.backward()
-        optimizer.step()
+
+        if scaler:
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()  # adjust scaling for next minibatch
+        else:
+            loss.backward()
+            optimizer.step()
+
         ddp_loss[0] += loss.item()
         ddp_loss[1] += len(batch)
+
         if rank == 0:
             inner_pbar.update(1)
         if profiler:
@@ -297,6 +306,16 @@ def fsdp_main(args):
     val_batch_size = cfg.val_batch_size
 
     mp_policy, wrapping_policy = get_policies(cfg)
+    
+    scaler=None
+
+    if cfg.use_mixed_precision and not bf16_ready:
+        # we'll switch to fp16 for V100 etc where BFloat is not supported but user wants mixed precision
+        from torch.distributed.fsdp.sharded_grad_scaler import ShardedGradScaler
+
+        scaler = ShardedGradScaler()
+        if rank==0:
+            print(f"--> FP16 implemented for mixed precision support.")
 
     model_name = cfg.model_name  # "google/t5-v1_1-small"
     if rank == 0:
@@ -359,10 +378,11 @@ def fsdp_main(args):
     test_loader = torch.utils.data.DataLoader(val_dataset, **test_kwargs)
 
     torch.cuda.set_device(local_rank)
+    
     clear_gpu_cache(local_rank)
 
     # HF checkpointing...
-    if cfg.activation_checkpointing:
+    if cfg.HF_activation_checkpointing:
         model.gradient_checkpointing_enable()
         print(f"HF Activation checkpointing enabled\n")
 
@@ -386,6 +406,7 @@ def fsdp_main(args):
         device_id=torch.cuda.current_device(),  # streaming init
     )
 
+    
     #optional - you can print the sharding plan to see how FSDP has structured the layout.
     if rank == 0 and cfg.print_sharding_plan:
         print(f"model ")
@@ -485,6 +506,7 @@ def fsdp_main(args):
             epoch,
             sampler=sampler1,
             profiler=torch_profiler,
+            scaler=scaler,
         )
 
         if cfg.run_validation:
