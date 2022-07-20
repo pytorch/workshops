@@ -77,6 +77,8 @@ from collections import deque
 import datasets_grammar as dg
 import tqdm
 
+import performance
+
 # config
 import config
 
@@ -217,7 +219,7 @@ def train(
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()  # adjust scaling for next minibatch
-        else:
+        else:   
             loss.backward()
             optimizer.step()
 
@@ -406,6 +408,16 @@ def fsdp_main(args):
         device_id=torch.cuda.current_device(),  # streaming init
     )
 
+    # if fsdp activation checkpointing:
+    if cfg.FSDP_activation_checkpointing:
+        import activation_checkpointing as ac
+        ac.apply_fsdp_checkpointing(model)
+
+        # confirm we are not double checkpointing
+        if cfg.HF_activation_checkpointing:
+            print(f"cannot run with both HF and FSDP checkpointing.  Please check config..aborting")
+            return
+
     
     #optional - you can print the sharding plan to see how FSDP has structured the layout.
     if rank == 0 and cfg.print_sharding_plan:
@@ -426,7 +438,7 @@ def fsdp_main(args):
 
             external_file.close()
 
-    lr = 0.0008
+    lr = cfg.learning_rate
     gamma = 0.85
 
     # we can train with either ChildTuning (recommended) or whole model fine tuning.
@@ -457,8 +469,12 @@ def fsdp_main(args):
     best_val_loss = float("inf")
     curr_val_loss = float("inf")
 
+    # will hold our performance timer
+    memmax = None
+
     # --- main training loop 
     if rank == 0:
+        memmax = performance.Memory_Maximizer()
         dur = []
         train_acc_tracking = []
         val_acc_tracking = []
@@ -484,11 +500,12 @@ def fsdp_main(args):
     """
 
     if rank == 0 and cfg.track_memory:
-        fn = cfg.model_name + "memory_tracking.txt"
         mem_alloc_tracker = []
-        mem_reserved_tracker = []
+        
 
     # -- Start Training -----
+    if rank==0:
+        memmax.start()
 
     for epoch in range(1, epochs + 1):
         if rank == 0:
@@ -508,6 +525,8 @@ def fsdp_main(args):
             profiler=torch_profiler,
             scaler=scaler,
         )
+        if rank==0:
+            memmax.update()
 
         if cfg.run_validation:
             curr_val_loss = validation(model, local_rank, rank, world_size, test_loader)
@@ -526,9 +545,6 @@ def fsdp_main(args):
             if cfg.track_memory:
                 mem_alloc_tracker.append(
                     format_metrics_to_gb(torch.cuda.memory_allocated())
-                )
-                mem_reserved_tracker.append(
-                    format_metrics_to_gb(torch.cuda.memory_reserved())
                 )
 
         # save this epochs checkpoint if val loss is current best
@@ -571,7 +587,7 @@ def fsdp_main(args):
 
     # init_end_event.record()
     if rank == 0:
-        # inner_pbar.close()
+        
         total_training_time = time.time() - training_start_time
         print(f"Total training time = {total_training_time:.2f}")
         print("Times per epoch:")
@@ -581,13 +597,14 @@ def fsdp_main(args):
 
         # training is done...show some training stats for memory use.
         # memory
+        memmax.stop()
+
         if cfg.track_memory:
-            print(f"total memory reserved: {mem_reserved_tracker}")
             print(f"total memory allocated: {mem_alloc_tracker}")
 
         print(f"Training accuracy: {train_acc_tracking}")
         if cfg.run_validation:
-            print(f"Validation accuracy: {val_acc_tracking}")
+            print(f"Validation accuracy: {val_acc_tracking}") 
             print(f"\n Best Val accuracy: {best_val_loss}")
 
         # memory summary

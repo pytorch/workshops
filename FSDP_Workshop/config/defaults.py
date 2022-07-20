@@ -18,7 +18,7 @@ class train_config:
     
     
     # model
-    model_name = "google/t5-v1_1-large"  # << - adjust model size here
+    model_name = "google/t5-v1_1-small"  # << - adjust model size here
     
     # available models
     # google/t5-v1_1-small  # 60 M
@@ -43,21 +43,21 @@ class train_config:
     # dataloaders
     num_workers_dataloader: int = 0
 
-    # policies - this will default to BF16, but if no native support detected, will 
+    # policies 
+    # mixed precision this will default to BFloat16, but if no native support detected, will 
     # use FP16.  (note that FP16 is not recommended for larger models...)
-
     use_mixed_precision: bool = True
 
-    HF_activation_checkpointing: bool = True
-    FSDP_activation_checkpointing: bool = False
+    HF_activation_checkpointing: bool = False
+    FSDP_activation_checkpointing: bool = True
 
     # datasets
     dataset_train = "datasets_grammar/grammar_train.csv" # gtrain_150K.csv
     dataset_test = "datasets_grammar/grammar_validation.csv"
 
     # training
-    batch_size: int = 8
-    num_epochs: int = 8
+    batch_size: int = 24
+    num_epochs: int = 2
 
     # validation
     run_validation: bool = True
@@ -71,8 +71,8 @@ class train_config:
     distributed_debug: bool = True
 
     # Fine Tuning
-    use_child_tuning: bool = True
-    lr: float = 4e-8
+    use_child_tuning: bool = False
+    learning_rate: float = 4e-8
 
     use_task_free: bool = True
     use_fisher_matrix: bool = False
