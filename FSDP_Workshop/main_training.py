@@ -425,7 +425,7 @@ def fsdp_main(args):
         fn = printable_model_name + "-sharded_layout.txt"
         with open(fn, "w") as external_file:
             header_text = (
-                f"model = {model_name}, sharded with {fsdp_unit_params} parameters\n"
+                f"model = {model_name}\n"
             )
             print(header_text, file=external_file)
             total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
