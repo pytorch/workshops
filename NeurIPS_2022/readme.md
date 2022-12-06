@@ -29,8 +29,9 @@ We will present Holistic Trace Analysis (HTA), a tool to identify computation, c
 In this talk we present PyTorch Benchmark(TorchBench), a benchmarking suite to provide quick and stable performance signals to hold the line of performance in PyTorch development. TorchBench identifies performance regressions and provides CI services for PyTorch developers to test their PRs. It can also be used to profile specific models and identify optimization opportunities.
 
 
-## Part 2: Dec 5 (Virtual), 9:30a - 11:30a PST (UTC-8) / 11:30a - 1:30p CST (UTC-6)
+## Part 2: Dec 7 (Virtual), 9:30a - 11:30a PST (UTC-8) / 11:30a - 1:30p CST (UTC-6)
 ------------------------------------------------------------------------------------------------
+Focus on the new PyTorch Compiler features (https://pytorch.org/get-started/pytorch-2.0/)
 
 *6. A deep dive into TorchDynamo,  Speaker: Animesh Jain*
 
