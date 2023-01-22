@@ -33,7 +33,7 @@ In this talk we present PyTorch Benchmark(TorchBench), a benchmarking suite to p
 ------------------------------------------------------------------------------------------------
 Focus on the new PyTorch Compiler features (https://pytorch.org/get-started/pytorch-2.0/)
 
-*6. A deep dive into TorchDynamo,  Speaker: Animesh Jain*  [slides](TorchDynamo%20Deep%20Dove%20-%20NeurIPS%202022.pdf)
+*6. A deep dive into TorchDynamo,  Speaker: Animesh Jain*  [slides](TorchDynamo%20Deep%20Dive%20-%20NeurIPS%202022.pdf)
 
 This talk presents a deep dive into TorchDynamo. TorchDynamo is a Python-level JIT compiler designed to make unmodified PyTorch programs faster. It rewrites Python bytecode in order to extract sequences of PyTorch operations into a graph which is then just-in-time compiled with a customizable backend. It is designed to mix Python execution with compiled backends to get the best of both worlds: usability and performance
 
