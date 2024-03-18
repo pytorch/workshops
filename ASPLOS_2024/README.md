@@ -24,7 +24,7 @@ PyTorch 2's capabilities are rigorously evaluated using a comprehensive suite of
 This tutorial equips researchers with a thorough understanding of PyTorch 2's internal workings. By delving into these mechanisms, researchers can unlock the full potential of PyTorch 2 as a platform and push the boundaries of what's possible in machine learning frameworks.
 
 
-### Agenda:
+### Agenda
 
 April 27th, 2024 (Saturday)
 
@@ -37,8 +37,12 @@ April 27th, 2024 (Saturday)
 | 10:00am - 10:30am | Morning Break | |
 | 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell |
 | Noon - 1:30pm | Lunch | |
-| 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri Bin Bao  |
+| 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri, Bin Bao  |
 | 2:15pm - 3:00pm | Tensor Subclass Integration in PT2 | Brian Hirsh, Elias Ellison |
 | 3:00pm - 3:30pm | Afternoon break | |
 | 3:30pm - 4:15 pm | Performance Benchmarking and Tuning | Bin Bao, Yang Chen |
 | 4:15pm - 5pm | Crazy Research Ideas | Jason Ansel, Horace He |
+
+### References
+
+PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation [Paper](https://pytorch.org/assets/pytorch2-2.pdf)
