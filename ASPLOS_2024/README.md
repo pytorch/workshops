@@ -1,6 +1,6 @@
 PyTorch 2 Tutorial - ASPLOS 2024 Workshop
 =========================================
-*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Mario Lezcano, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison Yang Chen*
+*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Michael Lazos, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison Yang Chen*
 
 ### Date:
 Full-day on April 27 (Saturday), 2024
