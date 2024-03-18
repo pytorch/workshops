@@ -28,8 +28,6 @@ This tutorial equips researchers with a thorough understanding of PyTorch 2's in
 
 April 27th, 2024 (Saturday)
 
-8:00am - 8:30am: The Road to PyTorch 2:
-
 | Time | Sessions | Speakers |
 | ------------- | ------------- | ------------- |
 | 8:00am - 8:30am  | The Road to PyTorch 2  | Peng Wu  |
