@@ -1,6 +1,6 @@
 PyTorch 2 Tutorial and Paper presentation @ ASPLOS'2024
 =======================================================
-*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Michael Lazos, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison Yang Chen*
+*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Michael Lazos, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison Yang Chen, Boyuan Feng*
 
 ## PyTorch 2 Tutorial
 
@@ -40,9 +40,9 @@ April 27th, 2024 (Saturday)
 | 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri, Bin Bao  |
 | 2:15pm - 3:00pm | Tensor Subclass Integration in PT2 | Brian Hirsh, Elias Ellison |
 | 3:00pm - 3:30pm | Afternoon break | |
-| 3:30pm - 4:15 pm | Performance Benchmarking and Tuning | Bin Bao, Yang Chen |
+| 3:30pm - 4:15 pm | Performance Benchmarking and Tuning |  Yang Chen, Boyuan Feng |
 | 4:15pm - 5pm | Crazy Research Ideas | Jason Ansel, Horace He |
 
 ## PyTorch 2 Paper
 
-The [PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation Paper](https://pytorch.org/assets/pytorch2-2.pdf) will also be presented at the ASPLOS'24 Conference (Date and Time slot during conference TBD)
+The [PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation Paper](https://pytorch.org/assets/pytorch2-2.pdf) will also be presented at the [ASPLOS'24 Conference](https://www.asplos-conference.org/asplos2024/main-program/) (Date and Time slot during conference TBD)
