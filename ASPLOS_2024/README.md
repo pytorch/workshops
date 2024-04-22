@@ -32,8 +32,8 @@ April 27th, 2024 (Saturday)
 
 | Time | Sessions | Speakers |
 | ------------- | ------------- | ------------- |
-| 8:00am - 8:30am  | The Road to PyTorch 2  | Peng Wu  |
-| 8:30am - 10:00am | PT2 Graph Capturing: TorchDynamo  | Animesh Jain, Mario Lezcano, Michael Lazos |
+| 8:00am - 8:15am  | The Road to PyTorch 2  | Peng Wu  |
+| 8:15am - 10:00am | PT2 Graph Capturing: TorchDynamo  | Animesh Jain, Mario Lezcano, Michael Lazos |
 | 10:00am - 10:30am | Morning Break | |
 | 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell |
 | Noon - 1:30pm | Lunch | |
@@ -45,4 +45,4 @@ April 27th, 2024 (Saturday)
 
 ## PyTorch 2 Paper
 
-The [PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation Paper](https://pytorch.org/assets/pytorch2-2.pdf) will also be presented at the [ASPLOS'24 Conference](https://www.asplos-conference.org/asplos2024/main-program/) (Date and Time slot during conference TBD)
+The [PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation Paper](https://pytorch.org/assets/pytorch2-2.pdf) will also be presented at the [ASPLOS'24 Conference](https://www.asplos-conference.org/asplos2024/main-program/) (14:30 PDT – 15:30 PDT: Session 6C: Optimization of Tensor Programs, Tuesday, April 30, 2024)
