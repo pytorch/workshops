@@ -35,7 +35,7 @@ April 27th, 2024 (Saturday)
 | 8:00am - 8:15am  | The Road to PyTorch 2 | Peng Wu | |
 | 8:15am - 10:00am | PT2 Graph Capturing: TorchDynamo and AOTAutograd | Animesh Jain, Mario Lezcano, Brian Hirsh, Michael Lazos | [notebook](https://colab.research.google.com/drive/19JURKGhy_L82Y-2MUc2jurJwARCPy-YL?usp=sharing) |
 | 10:00am - 10:30am | Morning Break | | |
-| 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell | |
+| 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell | [notebook](https://colab.research.google.com/drive/1FTeYO6sf1Vco8dn0qyWze8WIVWLiXQ3z?usp=sharing) |
 | Noon - 1:30pm | Lunch | | |
 | 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri, Bin Bao | [notebook](https://colab.research.google.com/drive/1YoKqydw3PmbTSwKCSEb4Ao4D55o4AII8?usp=sharing) |
 | 2:15pm - 3:00pm | Tensor Subclass Integration in PT2 | Brian Hirsh, Elias Ellison | |
