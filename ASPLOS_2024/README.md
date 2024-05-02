@@ -1,6 +1,6 @@
 PyTorch 2 Tutorial and Paper presentation @ ASPLOS'2024
 =======================================================
-*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Michael Lazos, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison Yang Chen, Boyuan Feng*
+*Peng Wu, Jason Ansel, Horace He, Animesh Jain, Mario Lezcano, Michael Lazos, Peter Bell, Avik Chaudhuri, Bin Bao, Brian Hirsh, Elias Ellison, Yang Chen, Boyuan Feng*
 
 ## PyTorch 2 Tutorial
 
@@ -33,16 +33,21 @@ April 27th, 2024 (Saturday)
 | Time | Sessions | Speakers | Slides and Notebooks |
 | ------------- | ------------- | ------------- | ------------- |
 | 8:00am - 8:15am  | The Road to PyTorch 2 | Peng Wu | |
-| 8:15am - 10:00am | PT2 Graph Capturing: TorchDynamo and AOTAutograd | Animesh Jain, Mario Lezcano, Brian Hirsh, Michael Lazos | [notebook](https://colab.research.google.com/drive/19JURKGhy_L82Y-2MUc2jurJwARCPy-YL?usp=sharing) |
+| 8:15am - 10:00am | PT2 Graph Capturing: TorchDynamo and AOTAutograd | Animesh Jain, Mario Lezcano, Brian Hirsh, Michael Lazos | [TorchDynamo intro](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/dynamo_intro.pdf), [TorchDynamo example](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/dynamo_example.pdf), [AOTAutograd](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/aot_autograd.pdf),  [notebook](https://colab.research.google.com/drive/19JURKGhy_L82Y-2MUc2jurJwARCPy-YL?usp=sharing) |
 | 10:00am - 10:30am | Morning Break | | |
-| 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell | [notebook](https://colab.research.google.com/drive/1FTeYO6sf1Vco8dn0qyWze8WIVWLiXQ3z?usp=sharing) |
+| 10:30am - Noon| PT2 Compiler: TorchInductor | Horace He, Peter Bell | [TorchInductor](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/inductor.pdf), [notebook](https://colab.research.google.com/drive/1FTeYO6sf1Vco8dn0qyWze8WIVWLiXQ3z?usp=sharing) |
 | Noon - 1:30pm | Lunch | | |
-| 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri, Bin Bao | [notebook](https://colab.research.google.com/drive/1YoKqydw3PmbTSwKCSEb4Ao4D55o4AII8?usp=sharing) |
-| 2:15pm - 3:00pm | Tensor Subclass Integration in PT2 | Brian Hirsh, Elias Ellison | |
+| 1:30pm - 2:15pm  | PT2 Export Path and Ahead-Of-Time Compilation | Avik Chaudhuri, Bin Bao | [TorchExport](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/export.pdf), [AOTInductor](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/aot_inductor.pdf), [notebook](https://colab.research.google.com/drive/1YoKqydw3PmbTSwKCSEb4Ao4D55o4AII8?usp=sharing) |
+| 2:15pm - 3:00pm | Tensor Subclass Integration in PT2 | Brian Hirsh, Elias Ellison | [notebook](https://colab.research.google.com/drive/1zjAisRrc8R6uixKsrs1DRm3lwz5MWN68?usp=sharing) |
 | 3:00pm - 3:30pm | Afternoon break | | |
-| 3:30pm - 4:15 pm | Performance Benchmarking and Tuning |  Yang Chen, Boyuan Feng | [notebook](https://colab.research.google.com/drive/1XQwio7DsqB5LP2D574f_uIb8G7KhirNa?usp=sharing) |
+| 3:30pm - 4:15 pm | Performance Benchmarking and Profiling |  Yang Chen, Boyuan Feng | [benchmarking](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/benchmarking.pdf), [profiling](https://github.com/pytorch/workshops/tree/master/ASPLOS_2024/profiling.pdf) |
 | 4:15pm - 5pm | Crazy Research Ideas | Jason Ansel, Horace He | |
+
+## PyTorch 2 Tutorial Questionaire
+We would appreicate your feedbacks to our tutorial. Please help to fill this 3-min [questionaire](https://forms.gle/J2AqHXMoYtEWRCC56) so that we can improve next time. Thanks!
+
 
 ## PyTorch 2 Paper
 
 The [PyTorch 2: Faster Machine Learning Through Dynamic Python Bytecode Transformation and Graph Compilation Paper](https://pytorch.org/assets/pytorch2-2.pdf) will also be presented at the [ASPLOS'24 Conference](https://www.asplos-conference.org/asplos2024/main-program/) (14:30 PDT – 15:30 PDT: Session 6C: Optimization of Tensor Programs, Tuesday, April 30, 2024)
+
